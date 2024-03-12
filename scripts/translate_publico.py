@@ -1,5 +1,6 @@
 from deep_translator import GoogleTranslator
 from fire import Fire
+from tqdm import tqdm
 
 from src.data import Dataset
 
@@ -9,14 +10,14 @@ def main(lang="en"):
 
     source_ds = Dataset("pt")
     target_ds = Dataset(lang)
-
-    ids = source_ds.ids
-    texts = source_ds.texts
-
-    translated = translator.translate_batch(texts)
-    for id, translation in zip(ids, translated):
-        target_ds.add(id, translation)
-    target_ds.save()
+    for id_, text in tqdm(source_ds):
+        if id_ not in target_ds:    
+            try:
+                translate = translator.translate(text, max_chars=10_000)
+                target_ds.add(id_, translate)
+            except Exception as e:
+                print(f"Error translating {id_}: {e}")
+            target_ds.save()
 
 
 if __name__ == "__main__":
