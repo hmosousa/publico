@@ -1,25 +1,24 @@
 from deep_translator import GoogleTranslator
 from tqdm import tqdm
 
-
-from src.contants import PARSED_PATH, TRANSLATED_PATH
+from fire import Fire
+from src.data import Dataset
 
 
 def main(lang="en"):
     translator = GoogleTranslator(source="pt", target=lang)
 
-    filepaths = list(PARSED_PATH.glob("*.txt"))
-    for input_fp in tqdm(filepaths):
-        output_fp = TRANSLATED_PATH / f"{input_fp.stem}.txt"
-        if not output_fp.exists():
-            content = input_fp.read_text()
-
-            if len(content) <= 5000:
+    source_ds = Dataset("pt")
+    target_ds = Dataset(lang)
+    for id, text in source_ds:
+        if id not in target_ds:
+            if len(text) <= 5000:
                 try:
-                    translated = translator.translate(content)
-                    output_fp.write_text(translated)
+                    translated = translator.translate(text)
+                    target_ds.add(id, translated)
                 except Exception as e:
-                    print(input_fp)
+                    target_ds.save()
+                    print(f"Error translating text og id {id}.")
                     print(e)
 
 

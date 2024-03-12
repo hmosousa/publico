@@ -1,6 +1,6 @@
 import json
 
-from src.contants import DATA_PATH
+from src.constants import DATA_PATH
 
 
 def main():

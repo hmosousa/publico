@@ -1,6 +1,6 @@
 from pymongo import MongoClient
 
-from src.contants import MONGO_ENDPOINT
+from src.constants import MONGO_ENDPOINT
 
 
 class Database:
