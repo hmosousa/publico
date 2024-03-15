@@ -5,7 +5,7 @@ from src.data import Dataset
 from src.translator import Translator
 
 
-def main(lang="es"):
+def main(lang="en"):
     translator = Translator(source="pt", target=lang)
 
     source_ds = Dataset("pt")
