@@ -61,5 +61,5 @@ The code of this project is released under the MIT License.
 
 For questions, suggestions, or collaborations, please contact the project maintainer:
 
-Project Maintainer: Hugo Sousa
-Email: [hugo.o.sousa@inesctec.pt]
+- **Project Maintainer:** Hugo Sousa
+- **Email:** hugo.o.sousa@inesctec.pt
