@@ -9,12 +9,8 @@ readme = "README.md"
 version = "0.0.1"
 dependencies = [
     "deep_translator==1.11.4",
-    "pymongo==4.6.2",
-    "python-dotenv==1.0.1",
     "fire==0.6.0",
     "tqdm==4.66.2",
-    "huggingface_hub==0.21.4",
-    "datasets==2.18.0"
 ]
 requires-python = "~=3.11"
 
