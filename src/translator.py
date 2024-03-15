@@ -1,5 +1,11 @@
 from deep_translator import GoogleTranslator
 
+_LANGUAGES = GoogleTranslator().get_supported_languages()
+
+
+def list_languages():
+    print(_LANGUAGES)
+
 
 class Translator:
     def __init__(self, source, target):
@@ -7,7 +13,7 @@ class Translator:
         self._target = target
         self._engine = GoogleTranslator(source=source, target=target)
 
-    def translate(self, text):        
+    def translate(self, text):
         if len(text) <= 5000:
             return self._translate(text)
         else:

@@ -1,27 +1,65 @@
-# Tradutor
+# Público News Translator
 
-Training a model to translate from English to European Portuguese.
+Translate news articles [scraped](https://github.com/hmosousa/publico_scraper) from Jornal Público into multiple languages using Google Translate.
 
-## Build data
+## Getting Started
 
-First, download the data:
+This guide will help you set up a development environment, download the news data, and translate it into the language of your choice.
 
-```sh
-sh scripts/download_data.sh
-```
+### Setting Up Your Development Environment
 
-Then process the dataset:
+To begin, you'll need to create a virtual environment and install the necessary dependencies. Follow these steps:
 
 ```sh
-python scripts/parse_publico.py
+# Create a virtual environment
+python -m venv .venv
+
+# Activate the virtual environment
+source .venv/bin/activate
+
+# Install the project dependencies
+pip install -e .
 ```
 
-And translate the corpus from Portuguese to English.
+### Downloading the Data
+
+To download the news articles from Jornal Público, execute the following command:
 
 ```sh
-python scripts/translate_publico.py
+sh scripts/download.sh
 ```
 
-This will produce a series of folders on the `resources` directory with the data required to fine-tune the model.
+### Translating the News
 
+Before translating the news, we first prepare the data by parsing it to remove metadata and eliminate duplicates:
 
+```sh
+python scripts/parse.py
+```
+
+This process generates a file named `pt.jsonl` in the `data` directory, containing all news articles ready for translation. To translate these articles into a desired language, use:
+
+```sh
+python scripts/translate.py --lang=<target_language>
+```
+
+Please replace `<target_language>` with the code of the language you want to translate the articles into.
+
+#### Language Support
+
+The translation tool supports multiple languages. To check the list of available languages for translation, run the following command in your terminal:
+
+```sh
+list_languages
+```
+
+## License
+
+The code of this project is released under the MIT License.
+
+## Contact
+
+For questions, suggestions, or collaborations, please contact the project maintainer:
+
+Project Maintainer: Hugo Sousa
+Email: [hugo.o.sousa@inesctec.pt]
